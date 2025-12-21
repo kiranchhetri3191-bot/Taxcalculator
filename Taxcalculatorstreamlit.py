@@ -103,18 +103,7 @@ if dark_mode:
         background-color: #1C1F26 !important;
         border: 1px solid #2E3440 !important;
     }
-    /* ===== SIDEBAR FILE UPLOADER TEXT FIX ===== */
-
-    /* Sidebar uploader label */
-    section[data-testid="stSidebar"] section[data-testid="stFileUploader"] label {
-        color: #FFFFFF !important;
-        font-weight: 500;
-    }
-
-    /* Sidebar uploader help text */
-    section[data-testid="stSidebar"] section[data-testid="stFileUploader"] small {
-        color: #DDDDDD !important;
-    }
+    
     </style>
     """, unsafe_allow_html=True)
 else:
@@ -132,6 +121,10 @@ else:
     section[data-testid="stFileUploader"] {
         background-color: #FFFFFF;
         border-radius: 12px;
+    }
+    /* FORCE file uploader text to BLACK */
+    section[data-testid="stFileUploader"] * {
+        color: #000000 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -452,6 +445,7 @@ else:
 
 
     
+
 
 
 
