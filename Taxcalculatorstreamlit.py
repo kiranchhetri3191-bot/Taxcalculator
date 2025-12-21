@@ -43,21 +43,6 @@ if dark_mode:
     .stMarkdown p, .stMarkdown li {
         color: #EAEAEA !important;
     }
-
-    div[data-testid="stInfo"] {
-        background-color: #F3F4F6 !important;  /* light grey */
-        color: #111827 !important;            /* dark text */
-        border-radius: 12px;
-        border-left: 6px solid #3B82F6;        /* blue accent */
-    }
-
-    /* Force text inside the box to black */
-    div[data-testid="stInfo"] p,
-    div[data-testid="stInfo"] li,
-    div[data-testid="stInfo"] span,
-    div[data-testid="stInfo"] strong {
-    color: #000000 !important;
-    }
     
     /* All text */
     html, body, [class*="css"] {
@@ -426,6 +411,7 @@ else:
 
 
     
+
 
 
 
