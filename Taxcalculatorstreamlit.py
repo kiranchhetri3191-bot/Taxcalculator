@@ -79,9 +79,9 @@ if dark_mode:
         color: #EAEAEA !important;
         border: 1px solid #2E3440;
     }
-        /* Sidebar – keep it green in dark mode */
+         /* Sidebar – force green in dark mode */
     section[data-testid="stSidebar"] {
-         background-color: #E8F5E9 !important;
+        background-color: #E8F5E9 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -417,6 +417,7 @@ else:
 
 
     
+
 
 
 
