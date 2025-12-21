@@ -347,7 +347,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig)
 
-    plt.ticklables_format(style='plain',axis='y') # Disables scientific notion
+    plt.ticklabel_format(style='plain',axis='y') # Disables scientific notion
 
     #PDF Download Button
 
@@ -383,5 +383,6 @@ else:
 
 
     
+
 
 
