@@ -43,8 +43,13 @@ if dark_mode:
     .stMarkdown p, .stMarkdown li {
         color: #EAEAEA !important;
     }
-    .stAlert {
-        color: #FFD966 !important;
+           /* Fix info / how-to-use box visibility in dark mode */
+    div[data-testid="stExpander"],
+    div[data-testid="stAlert"],
+    div[data-testid="stInfo"] {
+        background-color: #1C1F26 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #2E3440;
     }
     
     /* All text */
@@ -80,6 +85,7 @@ if dark_mode:
     .stAlert {
         background-color: #1C1F26 !important;
         color: #EAEAEA !important;
+        border: 1px solid #2E3440;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -413,6 +419,7 @@ else:
 
 
     
+
 
 
 
