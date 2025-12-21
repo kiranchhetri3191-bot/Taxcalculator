@@ -103,6 +103,10 @@ if dark_mode:
         background-color: #1C1F26 !important;
         border: 1px solid #2E3440 !important;
     }
+        /* FORCE file uploader text to BLACK */
+    section[data-testid="stFileUploader"] * {
+        color: #000000 !important;
+    }
     
     </style>
     """, unsafe_allow_html=True)
@@ -121,10 +125,6 @@ else:
     section[data-testid="stFileUploader"] {
         background-color: #FFFFFF;
         border-radius: 12px;
-    }
-    /* FORCE file uploader text to BLACK */
-    section[data-testid="stFileUploader"] * {
-        color: #000000 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -445,6 +445,7 @@ else:
 
 
     
+
 
 
 
