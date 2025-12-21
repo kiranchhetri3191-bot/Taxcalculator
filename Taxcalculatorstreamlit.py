@@ -103,6 +103,11 @@ if dark_mode:
         background-color: #1C1F26 !important;
         border: 1px solid #2E3440 !important;
     }
+    /* File uploader inner text (Drag & Drop, limit text) */
+    section[data-testid="stFileUploader"] p,
+    section[data-testid="stFileUploader"] span {
+        color: #111111 !important;
+    }
     
     </style>
     """, unsafe_allow_html=True)
@@ -441,6 +446,7 @@ else:
 
 
     
+
 
 
 
