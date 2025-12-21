@@ -346,7 +346,13 @@ if uploaded_file is not None:
     ax.set_title("Total Tax Liability Comparison")
 
     st.pyplot(fig)
+    
+    from matplotlib.ticker import FuncFormatter
 
+    def indian_format(x, pos):
+        if x >= 10000000: return f'₹{x/10000000:.1f} Cr'
+        elif x >= 100000: return f'₹{x/100000:.1f} L'
+        else: return f'₹{x/1000:.0f} K' if x >= 1000 else f'₹{x:.0f}'
     plt.ticklabel_format(style='plain',axis='y') # Disables scientific notion
 
     #PDF Download Button
@@ -383,6 +389,7 @@ else:
 
 
     
+
 
 
 
