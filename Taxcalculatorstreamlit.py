@@ -79,6 +79,9 @@ if dark_mode:
         color: #EAEAEA !important;
         border: 1px solid #2E3440;
     }
+    [data-testid="stSidebar"] {
+        background-color: #0E2A1F;
+    }
     
     </style>
     """, unsafe_allow_html=True)
@@ -417,6 +420,7 @@ else:
 
 
     
+
 
 
 
