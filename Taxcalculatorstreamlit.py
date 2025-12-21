@@ -14,6 +14,16 @@ st.set_page_config(
     page_icon="logo.png",
     layout="wide"
 )
+col1, col2 = st.columns([1, 6])
+
+with col1:
+    st.image("logo.png", width=70)
+
+with col2:
+    st.markdown(
+        "<h1 style='margin-top:15px;'>Indian Income Tax Calculator</h1>",
+        unsafe_allow_html=True
+    )
 #Dark-Mode
 
 dark_mode = st.sidebar.toggle("🌙 Dark Mode")
@@ -393,6 +403,7 @@ else:
 
 
     
+
 
 
 
