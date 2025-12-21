@@ -62,10 +62,6 @@ if dark_mode:
         border-radius: 10px;
         padding: 10px;
     }
-    /*File uploader text White (default Streamlit behaviour)*/
-    section[data-testid="stFileUploader"]
-        color: #FFFFFF !important;
-    }
 
     /* Buttons */
     button {
@@ -447,6 +443,7 @@ else:
 
 
     
+
 
 
 
