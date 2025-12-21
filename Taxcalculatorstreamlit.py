@@ -14,21 +14,6 @@ st.set_page_config(
     page_icon="logo.png",
     layout="wide"
 )
-st.markdown("""
-<style>
-/* File uploader box – change white box color */
-section[data-testid="stFileUploader"] {
-    background-color: #E3F2FD !important;   /* light blue */
-    border: 1px solid #1976D2 !important;
-    border-radius: 10px;
-}
-
-/* File uploader text */
-section[data-testid="stFileUploader"] * {
-    color: #000000 !important;  /* BLACK TEXT */
-}
-</style>
-""", unsafe_allow_html=True)
 
 col1, col2 = st.columns([1, 6])
 
@@ -75,6 +60,11 @@ if dark_mode:
         background-color: #1C1F26;
         border: 1px solid #2E3440;
         border-radius: 10px;
+        padding: 10px;
+    }
+    /*File uploader text White (default Streamlit behaviour)*/
+    section[data-testid="stFileUploader"]
+        color: #FFFFFF !important;
     }
 
     /* Buttons */
@@ -457,6 +447,7 @@ else:
 
 
     
+
 
 
 
