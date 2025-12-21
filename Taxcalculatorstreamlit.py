@@ -313,11 +313,14 @@ def generate_pdf(df):
 
     pdf.save()
     buffer.seek(0)
-    return buffer            
+    return buffer    
 
-# --- Streamlit App ---
-st.title("Indian Income Tax Regime Calculator")
-st.write("Upload a CSV file with columns: Name, Department, Age, grossincome, Deductions")
+
+
+
+
+
+
 
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
@@ -414,6 +417,7 @@ else:
 
 
     
+
 
 
 
