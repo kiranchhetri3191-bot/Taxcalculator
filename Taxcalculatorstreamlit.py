@@ -46,9 +46,7 @@ if dark_mode:
     .stAlert {
         color: #FFD966 !important;
     }
-    </style>
-    """, unsafe_allow_html=True)
-
+    
     /* All text */
     html, body, [class*="css"] {
         color: #EAEAEA !important;
@@ -415,6 +413,7 @@ else:
 
 
     
+
 
 
 
