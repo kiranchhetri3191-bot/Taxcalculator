@@ -51,6 +51,12 @@ if dark_mode:
         color: #FFFFFF !important;
         border: 1px solid #2E3440;
     }
+    
+        /* FORCE text visibility inside "How to use" box */
+    div[data-testid="stInfo"] * {
+        color: #FFFFFF !important;
+    }
+    
         /* Fix TEXT inside info / how-to box (this is the missing part) */
     div[data-testid="stInfo"] p,
     div[data-testid="stInfo"] li,
@@ -427,6 +433,7 @@ else:
 
 
     
+
 
 
 
