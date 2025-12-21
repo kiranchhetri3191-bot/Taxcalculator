@@ -82,6 +82,27 @@ if dark_mode:
     [data-testid="stSidebar"] {
         background-color: #0E2A1F;
     }
+    /* Sidebar background */
+    section[data-testid="stSidebar"] {
+        background-color: #0E1117 !important;
+    }
+
+    /* Sidebar text */
+    section[data-testid="stSidebar"] * {
+        color: #FFFFFF !important;
+    }
+
+    /* File uploader text */
+    section[data-testid="stFileUploader"] label,
+    section[data-testid="stFileUploader"] small {
+        color: #FFFFFF !important;
+    }
+
+    /* File uploader box */
+    section[data-testid="stFileUploader"] {
+        background-color: #1C1F26 !important;
+        border: 1px solid #2E3440 !important;
+    }
     
     </style>
     """, unsafe_allow_html=True)
@@ -420,6 +441,7 @@ else:
 
 
     
+
 
 
 
