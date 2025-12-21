@@ -103,11 +103,22 @@ if dark_mode:
         background-color: #1C1F26 !important;
         border: 1px solid #2E3440 !important;
     }
-    /* File uploader inner text (Drag & Drop, limit text) */
-    section[data-testid="stFileUploader"] p,
-    section[data-testid="stFileUploader"] span,
-    section[data-testid="stFileUploader"] small {
+    /* ===== File uploader FULL FIX ===== */
+
+    /* Uploader box */
+    section[data-testid="stFileUploader"] {
+        background-color: #F5F5F5 !important;
+        border: 1px solid #CCCCCC !important;
+    }
+
+    /* ALL text inside uploader */
+    section[data-testid="stFileUploader"] * {
         color: #000000 !important;
+    }
+
+    /* Browse files button text */
+    section[data-testid="stFileUploader"] button {
+        color: #FFFFFF !important;
     }
     
     </style>
@@ -447,6 +458,7 @@ else:
 
 
     
+
 
 
 
