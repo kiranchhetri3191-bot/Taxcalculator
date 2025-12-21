@@ -335,6 +335,18 @@ if uploaded_file is not None:
     total_old_tax = df_output["Old Regime Tax"].sum()
     total_new_tax = df_output["New Regime Tax"].sum()
 
+    # Defining the formatter
+    from matplotlib.ticker import FuncFormatter
+    
+    # Disables scientific notion
+
+    def indian_format(x, pos):
+        if x >= 10000000: return f'₹{x/10000000:.1f} Cr'
+        elif x >= 100000: return f'₹{x/100000:.1f} L'
+        else: return f'₹{x/1000:.0f} K' if x >= 1000 else f'₹{x:.0f}'
+
+    # Creating Chat
+    
     fig, ax = plt.subplots()
 
     ax.bar(
@@ -347,14 +359,6 @@ if uploaded_file is not None:
 
     st.pyplot(fig)
     
-    from matplotlib.ticker import FuncFormatter
-
-    def indian_format(x, pos):
-        if x >= 10000000: return f'₹{x/10000000:.1f} Cr'
-        elif x >= 100000: return f'₹{x/100000:.1f} L'
-        else: return f'₹{x/1000:.0f} K' if x >= 1000 else f'₹{x:.0f}'
-    plt.ticklabel_format(style='plain',axis='y') # Disables scientific notion
-
     #PDF Download Button
 
     pdf_buffer = generate_pdf(df_output)
@@ -389,6 +393,7 @@ else:
 
 
     
+
 
 
 
