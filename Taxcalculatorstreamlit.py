@@ -138,7 +138,7 @@ st.write("")  # spacing
 # ---------------- SIDEBAR ----------------
 st.sidebar.markdown(
     """
-    <h2 style='color:#2196F3;'>⚙ Controls</h2>
+    <h2 style='color:#1B5E20;'>⚙ Controls</h2>
     """,
     unsafe_allow_html=True
 )
@@ -413,6 +413,7 @@ else:
 
 
     
+
 
 
 
