@@ -1,5 +1,187 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+from io import BytesIO
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from io import BytesIO
+
+#Front-End
+
+# ---------------- PAGE SETUP ----------------
+st.set_page_config(
+    page_title="Tax Calculator",
+    page_icon="💰",
+    layout="wide"
+)
+#Dark-Mode
+
+dark_mode = st.sidebar.toggle("🌙 Dark Mode")
+
+if dark_mode:
+    st.markdown("""
+    <style>
+    /* App background */
+    .stApp {
+        background-color: #0E1117;
+        color: #EAEAEA;
+    }
+
+    /* All text */
+    html, body, [class*="css"] {
+        color: #EAEAEA !important;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5 {
+        color: #FFFFFF !important;
+    }
+
+    /* File uploader */
+    section[data-testid="stFileUploader"] {
+        background-color: #1C1F26;
+        border: 1px solid #2E3440;
+        border-radius: 10px;
+    }
+
+    /* Buttons */
+    button {
+        background-color: #2E7D32 !important;
+        color: white !important;
+        border-radius: 8px;
+    }
+
+    /* Dataframe */
+    .stDataFrame {
+        background-color: #1C1F26;
+    }
+
+    /* Info / success boxes */
+    .stAlert {
+        background-color: #1C1F26 !important;
+        color: #EAEAEA !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+    <style>
+    .stApp {
+        background-color: #F7F9FC;
+        color: #1F2937;
+    }
+
+    h1, h2, h3 {
+        color: #0F4C81;
+    }
+
+    section[data-testid="stFileUploader"] {
+        background-color: #FFFFFF;
+        border-radius: 12px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# ---------------- TITLE ----------------
+st.markdown(
+    """
+    <h1 style='text-align:center; color:#4CAF50;'>
+    💰 Indian Income Tax Calculator
+    </h1>
+    <p style='text-align:center; font-size:18px;'>
+    Compare <b>Old</b> vs <b>New</b> Tax Regime easily
+    </p>
+    """,
+    unsafe_allow_html=True
+)
+
+# ---------------- INFO BOX ----------------
+st.markdown(
+    """
+    <div style="
+        background-color:#FFF3E0;
+        padding:15px;
+        border-radius:12px;
+        border-left:6px solid #FF9800;
+        font-size:16px;
+    ">
+    📄 <b>How to use:</b><br>
+    Upload a CSV file with columns:<br>
+    <b>Name, Department, Age, grossincome, Deductions</b>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.write("")  # spacing
+
+# ---------------- SIDEBAR ----------------
+st.sidebar.markdown(
+    """
+    <h2 style='color:#2196F3;'>⚙ Controls</h2>
+    """,
+    unsafe_allow_html=True
+)
+
+uploaded_file = st.sidebar.file_uploader(
+    "📂 Upload CSV File",
+    type="csv"
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info("💡 Tip: Use clean data for accurate results")
+
+
+# ---------------- MAIN LOGIC ----------------
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
+  
+    st.markdown("## 📋 Uploaded Data")
+    st.dataframe(df, use_container_width=True)
+
+    st.markdown("## 🧮 Tax Results")
+   
+    # Example summary cards (you already calculate real tax below)
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown(
+            """
+            <div style="background-color:#E3F2FD; padding:15px; border-radius:12px;">
+            👤 <b>Total Employees</b><br>
+            <h2>{}</h2>
+            </div>
+            """.format(len(df)),
+            unsafe_allow_html=True
+        )
+
+    with col2:
+        st.markdown(
+            """
+            <div style="background-color:#E8F5E9; padding:15px; border-radius:12px;">
+            💸 <b>Old Regime</b><br>
+            <h3>Calculated</h3>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col3:
+        st.markdown(
+            """
+            <div style="background-color:#FCE4EC; padding:15px; border-radius:12px;">
+            🆕 <b>New Regime</b><br>
+            <h3>Calculated</h3>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    st.success("✅ Tax calculation completed successfully!")
+
+else:
+    st.warning("⚠ Please upload a CSV file to start")
+
 
 # --- Helper function: surcharge + cess + marginal relief ---
 def apply_surcharge_and_cess(tax, taxable, regime="New"):
@@ -82,6 +264,35 @@ def new_regime_tax(income):
 def income_collected(grossincome):
     grossincome = max(grossincome - 50000, 0)  # Standard deduction on salary only
     return grossincome
+def generate_pdf(df):
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    pdf.setFont("Helvetica-Bold", 14)
+    pdf.drawString(50, height - 50, "Indian Income Tax Report")
+
+    pdf.setFont("Helvetica", 10)
+    y = height - 90
+
+    for _, row in df.iterrows():
+        line = (
+            f"{row['EmployeeID']} | "
+            f"Old Tax: ₹{row['Old Regime Tax']} | "
+            f"New Tax: ₹{row['New Regime Tax']} | "
+            f"Recommended: {row['Recommended']}"
+        )
+        pdf.drawString(50, y, line)
+        y -= 18
+
+        if y < 50:
+            pdf.showPage()
+            pdf.setFont("Helvetica", 10)
+            y = height - 50
+
+    pdf.save()
+    buffer.seek(0)
+    return buffer            
 
 # --- Streamlit App ---
 st.title("Indian Income Tax Regime Calculator")
@@ -117,13 +328,53 @@ if uploaded_file is not None:
     st.success("✅ Tax calculation completed!")
     st.dataframe(df_output.head(11))
 
-    csv = df_output.to_csv(index=False).encode('utf-8')
-    st.download_button("Download Results as CSV", csv, "Tax_Calculation_Output.csv", "text/csv")
+    #Tax Comparison Chat
 
-    excel = df_output.to_excel(index=False)
-    st.download_button("Download Results as Excel", excel, "Tax_Calculation_Output.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    st.markdown("### 📊 Tax Comparison (Old vs New Regime)")
+
+    total_old_tax = df_output["Old Regime Tax"].sum()
+    total_new_tax = df_output["New Regime Tax"].sum()
+
+    fig, ax = plt.subplots()
+
+    ax.bar(
+        ["Old Regime", "New Regime"],
+        [total_old_tax, total_new_tax]
+        )
+
+    ax.set_ylabel("Total Tax Amount (₹)")
+    ax.set_title("Total Tax Liability Comparison")
+
+    st.pyplot(fig)
+
+    #PDF Download Button
+
+    pdf_buffer = generate_pdf(df_output)
+
+    st.download_button(
+        label="📄 Download Tax Report (PDF)",
+        data=pdf_buffer,
+        file_name="Income_Tax_Report.pdf",
+        mime="application/pdf"
+    )
+
+    csv = df_output.to_csv(index=False).encode('utf-8')
+    st.download_button("⬇️Download Results as CSV", csv, "Tax_Calculation_Output.csv", "text/csv")
+    #For Excell download
+
+    excel_buffer = BytesIO()
+    df_output.to_excel(excel_buffer, index=False, engine="openpyxl")
+    excel_buffer.seek(0)
+
+    st.download_button(
+        label="⬇️ Download Results as Excel",
+        data=excel_buffer,
+        file_name="Tax_Calculation_Output.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
 else:
     st.info("Please upload a CSV file to begin..")
+
 
 
 
