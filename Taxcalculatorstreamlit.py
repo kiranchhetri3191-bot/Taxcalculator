@@ -117,10 +117,10 @@ st.markdown(
 st.markdown(
     """
     <div style="
-        background-color:#FFF3E0;
+        background-color:#1E1E1E;
         padding:15px;
         border-radius:12px;
-        border-left:6px solid #FF9800;
+        border-left:6px solid #4CAF50;
         font-size:16px;
     ">
     📄 <b>How to use:</b><br>
@@ -411,6 +411,7 @@ else:
 
 
     
+
 
 
 
