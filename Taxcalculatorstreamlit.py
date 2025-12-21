@@ -51,6 +51,14 @@ if dark_mode:
         color: #FFFFFF !important;
         border: 1px solid #2E3440;
     }
+        /* Fix TEXT inside info / how-to box (this is the missing part) */
+    div[data-testid="stInfo"] p,
+    div[data-testid="stInfo"] li,
+    div[data-testid="stInfo"] span,
+    div[data-testid="stInfo"] strong {
+        color: #FFFFFF !important;
+        background: transparent !important;
+    }
     
     /* All text */
     html, body, [class*="css"] {
@@ -419,6 +427,7 @@ else:
 
 
     
+
 
 
 
