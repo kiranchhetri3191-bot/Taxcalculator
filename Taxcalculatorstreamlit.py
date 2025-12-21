@@ -347,6 +347,8 @@ if uploaded_file is not None:
 
     st.pyplot(fig)
 
+    plt.ticklables_format(style='plain',axis='y') # Disables scientific notion
+
     #PDF Download Button
 
     pdf_buffer = generate_pdf(df_output)
@@ -381,4 +383,5 @@ else:
 
 
     
+
 
