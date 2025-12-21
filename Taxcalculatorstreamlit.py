@@ -43,27 +43,21 @@ if dark_mode:
     .stMarkdown p, .stMarkdown li {
         color: #EAEAEA !important;
     }
-           /* Fix info / how-to-use box visibility in dark mode */
-    div[data-testid="stExpander"],
-    div[data-testid="stAlert"],
+
+        /* How-to-use (stInfo) box: white box + black text */
     div[data-testid="stInfo"] {
-        background-color: #1C1F26 !important;
-        color: #FFFFFF !important;
-        border: 1px solid #2E3440;
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-radius: 12px;
+        border-left: 6px solid #F59E0B;
     }
-    
-        /* FORCE text visibility inside "How to use" box */
-    div[data-testid="stInfo"] * {
-        color: #FFFFFF !important;
-    }
-    
-        /* Fix TEXT inside info / how-to box (this is the missing part) */
+
+    /* Force text inside the box to black */
     div[data-testid="stInfo"] p,
     div[data-testid="stInfo"] li,
     div[data-testid="stInfo"] span,
     div[data-testid="stInfo"] strong {
-        color: #FFFFFF !important;
-        background: transparent !important;
+    color: #000000 !important;
     }
     
     /* All text */
@@ -433,6 +427,7 @@ else:
 
 
     
+
 
 
 
