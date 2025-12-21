@@ -44,12 +44,11 @@ if dark_mode:
         color: #EAEAEA !important;
     }
 
-        /* How-to-use (stInfo) box: white box + black text */
     div[data-testid="stInfo"] {
-        background-color: #FFFFFF !important;
-        color: #000000 !important;
+        background-color: #F3F4F6 !important;  /* light grey */
+        color: #111827 !important;            /* dark text */
         border-radius: 12px;
-        border-left: 6px solid #F59E0B;
+        border-left: 6px solid #3B82F6;        /* blue accent */
     }
 
     /* Force text inside the box to black */
@@ -427,6 +426,7 @@ else:
 
 
     
+
 
 
 
