@@ -356,7 +356,7 @@ if uploaded_file is not None:
 
     ax.set_ylabel("Total Tax Amount (Rs)")
     ax.set_title("Total Tax Liability Comparison")
-
+    ax.yaxis.set_major_formatter(FuncFormatter(india_format))
     st.pyplot(fig)
     
     #PDF Download Button
@@ -393,6 +393,7 @@ else:
 
 
     
+
 
 
 
