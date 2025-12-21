@@ -79,9 +79,10 @@ if dark_mode:
         color: #EAEAEA !important;
         border: 1px solid #2E3440;
     }
-    /* Sidebar - force green */
-    section[data-testid="stSidebar"] > div:first-child {
-        background-color: #E8F5E9 !important;
+    
+    /* Sidebar background – Streamlit Cloud FIX */
+    div[data-testid="stSidebarContent"] {
+            background-color: #E8F5E9 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -417,6 +418,7 @@ else:
 
 
     
+
 
 
 
