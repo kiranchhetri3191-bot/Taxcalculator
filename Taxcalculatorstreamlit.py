@@ -80,10 +80,6 @@ if dark_mode:
         border: 1px solid #2E3440;
     }
     
-    /* Sidebar background – Streamlit Cloud FIX */
-    div[data-testid="stSidebarContent"] {
-            background-color: #E8F5E9 !important;
-    }
     </style>
     """, unsafe_allow_html=True)
 else:
@@ -418,6 +414,7 @@ else:
 
 
     
+
 
 
 
