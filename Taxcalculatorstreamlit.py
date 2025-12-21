@@ -278,8 +278,8 @@ def generate_pdf(df):
     for _, row in df.iterrows():
         line = (
             f"{row['EmployeeID']} | "
-            f"Old Tax: ₹{row['Old Regime Tax']} | "
-            f"New Tax: ₹{row['New Regime Tax']} | "
+            f"Old Tax: Rs{row['Old Regime Tax']} | "
+            f"New Tax: Rs{row['New Regime Tax']} | "
             f"Recommended: {row['Recommended']}"
         )
         pdf.drawString(50, y, line)
@@ -342,7 +342,7 @@ if uploaded_file is not None:
         [total_old_tax, total_new_tax]
         )
 
-    ax.set_ylabel("Total Tax Amount (₹)")
+    ax.set_ylabel("Total Tax Amount (Rs)")
     ax.set_title("Total Tax Liability Comparison")
 
     st.pyplot(fig)
@@ -381,3 +381,4 @@ else:
 
 
     
+
