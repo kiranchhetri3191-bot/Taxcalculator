@@ -118,7 +118,7 @@ st.markdown(
     """
     <div style="
         background-color:#1B2E22;
-        color:#E8F5E9
+        color:#FFFFFF
         padding:15px;
         border-radius:12px;
         border-left:6px solid #4CAF50;
@@ -412,6 +412,7 @@ else:
 
 
     
+
 
 
 
