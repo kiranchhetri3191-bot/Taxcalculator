@@ -117,12 +117,13 @@ st.markdown(
 st.markdown(
     """
     <div style="
-        background-color:#1B2E22;
-        color:#FFFFFF
+        background-color:#FFFFFF;
+        color:#1B5E20;
         padding:15px;
         border-radius:12px;
         border-left:6px solid #4CAF50;
         font-size:16px;
+        box-shadow:0 2px 6px rgba(0,0,0,0.15)
     ">
     📄 <b>How to use:</b><br>
     Upload a CSV file with columns:<br>
@@ -412,6 +413,7 @@ else:
 
 
     
+
 
 
 
