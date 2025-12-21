@@ -11,7 +11,7 @@ from io import BytesIO
 # ---------------- PAGE SETUP ----------------
 st.set_page_config(
     page_title="Tax Calculator",
-    page_icon="💰",
+    page_icon="logo.png",
     layout="wide"
 )
 #Dark-Mode
@@ -393,6 +393,7 @@ else:
 
 
     
+
 
 
 
