@@ -36,6 +36,18 @@ if dark_mode:
         background-color: #0E1117;
         color: #EAEAEA;
     }
+    summary {
+        color:#FFFFFF !important;
+        front-weight: bold;
+    }
+    .stMarkdown p, .stMarkdown li {
+        color: #EAEAEA !important;
+    }
+    .stAlert {
+        color: #FFD966 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     /* All text */
     html, body, [class*="css"] {
@@ -403,6 +415,7 @@ else:
 
 
     
+
 
 
 
