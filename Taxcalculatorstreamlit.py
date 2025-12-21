@@ -79,8 +79,7 @@ if dark_mode:
         color: #EAEAEA !important;
         border: 1px solid #2E3440;
     }
-         /* Sidebar – force green in dark mode */
-    section[data-testid="stSidebar"] {
+    section[data-testid="stSidebar"] > div:first-child {
         background-color: #E8F5E9 !important;
     }
     </style>
@@ -417,6 +416,7 @@ else:
 
 
     
+
 
 
 
