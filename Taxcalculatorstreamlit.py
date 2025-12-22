@@ -311,6 +311,24 @@ if uploaded_file is not None:
 
     df_out = pd.DataFrame(records)
 
+
+    dept_summary = (
+        df_out
+        .groupby("Department")
+        .agg(
+            Employees=("EmployeeID", "count"),
+            Old_Tax=("Old Regime Tax", "sum"),
+            New_Tax=("New Regime Tax", "sum")
+        )
+        .reset_index()
+    )
+
+    dept_summary["Better Regime"] = dept_summary.apply(
+        lambda x: "Old Regime" if x["Old_Tax"] < x["New_Tax"] else "New Regime",
+        axis=1
+    )
+
+
     total_old_tax = df_out["Old Regime Tax"].sum()
     total_new_tax = df_out["New Regime Tax"].sum()
     total_tax_saved = abs(total_old_tax - total_new_tax)
@@ -319,6 +337,10 @@ if uploaded_file is not None:
     st.success("✅ Tax calculation completed")
 
     st.write(f"💰 Total Tax Saved: ₹{int(total_tax_saved):,}")
+
+    st.markdown("## 🏢 Department-wise Tax Summary")
+    st.dataframe(dept_summary, use_container_width=True)
+
 
     
     st.dataframe(df_out)
@@ -396,6 +418,7 @@ st.caption(
 st.caption(
     "© 2025 | Developed as an independent academic project for learning and demonstration purposes."
 )
+
 
 
 
