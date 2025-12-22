@@ -14,6 +14,7 @@ This project is designed for **practical payroll, HR, and tax-planning use cases
 - 🧮 Accurate tax calculation for Old & New Regimes
 - 📊 Visual comparison graph (Old vs New Regime)
 - 📄 Download tax reports in **PDF**
+- 📄 Summary report export **PDF**
 - 📁 Export results to **Excel** and **CSV**
 - 💡 Helps identify the most beneficial tax regime
 
