@@ -89,13 +89,6 @@ if dark_mode:
         color: #EAEAEA !important;
     }
 
-        /* ---------- FILE UPLOADER TRANSPARENT ---------- */
-    section[data-testid="stFileUploader"] {
-        background-color: transparent !important;
-        border: none !important;
-        padding: 12px;
-    }
-
 
     /* ---------- INPUTS ---------- */
     input, textarea {
@@ -149,6 +142,12 @@ st.info(
 
 # ---------------- SIDEBAR UPLOADER ----------------
 uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
+
+st.sidebar.markdown(
+    "<span style='color:#E5E7EB; font-size:13px;'>Drag and drop CSV file here (Max 200 MB)</span>",
+    unsafe_allow_html=True
+)
+
 
 # ---------------- TAX FUNCTIONS ----------------
 def apply_surcharge_and_cess(tax, taxable, regime):
@@ -317,6 +316,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
