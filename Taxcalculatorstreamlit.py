@@ -6,53 +6,109 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from matplotlib.ticker import FuncFormatter
 
-# ================= PAGE CONFIG =================
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Indian Income Tax Calculator",
     page_icon="💰",
     layout="wide"
 )
 
-# ================= SIDEBAR =================
+# ---------------- SIDEBAR ----------------
 st.sidebar.title("⚙ Controls")
 dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=True)
 uploaded_file = st.sidebar.file_uploader("📂 Upload CSV", type="csv")
-st.sidebar.info("Supports large CSV (50k–100k rows)")
+st.sidebar.markdown("---")
+st.sidebar.caption("Supports large CSV (100k+)")
 
-# ================= SAFE THEME =================
+# ---------------- CLEAN DARK THEME ----------------
 if dark_mode:
     st.markdown("""
     <style>
+    /* ===== BACKGROUND ===== */
     .stApp {
-        background-color: #0E1117;
-        color: #EAEAEA;
+        background-color: #0f172a;
+        color: #e5e7eb;
     }
-    h1, h2, h3, h4 {
-        color: #FFFFFF;
-    }
+
+    /* ===== CONTENT PADDING ===== */
     .block-container {
-        padding: 2.5rem;
+        padding: 2.5rem 3rem;
     }
+
+    /* ===== HEADINGS ===== */
+    h1, h2, h3 {
+        color: #f9fafb;
+        font-weight: 700;
+    }
+
+    /* ===== SIDEBAR ===== */
     section[data-testid="stSidebar"] {
-        background-color: #0B1320;
-        border-right: 2px solid #1F2937;
+        background-color: #020617;
+        border-right: 1px solid #1e293b;
     }
+
     section[data-testid="stSidebar"] * {
-        color: #EAEAEA;
+        color: #e5e7eb;
+    }
+
+    /* ===== INFO / SUCCESS ===== */
+    .stAlert {
+        background-color: #020617;
+        border: 1px solid #1e293b;
+        color: #e5e7eb;
+        border-radius: 10px;
+    }
+
+    /* ===== TABLE ===== */
+    .stDataFrame {
+        background-color: #0f172a;
+    }
+
+    .stDataFrame thead tr th {
+        background-color: #020617;
+        color: #f9fafb;
+    }
+
+    .stDataFrame tbody tr td {
+        background-color: #0f172a;
+        color: #e5e7eb;
+        border-color: #1e293b;
+    }
+
+    /* ===== INPUTS ===== */
+    input {
+        background-color: #020617;
+        color: #f9fafb;
+        border: 1px solid #1e293b;
+        border-radius: 6px;
+    }
+
+    /* ===== DOWNLOAD BUTTONS ===== */
+    div[data-testid="stDownloadButton"] > button {
+        background-color: #2563eb;
+        color: white;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        opacity: 1;
+    }
+
+    div[data-testid="stDownloadButton"] > button:hover {
+        background-color: #1d4ed8;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# ================= HEADER =================
+# ---------------- HEADER ----------------
 st.title("💰 Indian Income Tax Calculator")
-st.caption("Compare Old vs New Regime • Bulk CSV • Excel & PDF")
+st.caption("Old vs New Regime • Bulk CSV • Excel & PDF")
 
 st.info(
-    "📄 CSV columns required:\n"
+    "📄 Upload CSV with columns:\n"
     "**Name, Department, Age, grossincome, Deductions**"
 )
 
-# ================= TAX FUNCTIONS =================
+# ---------------- TAX FUNCTIONS ----------------
 def salary_after_standard_deduction(salary):
     return max(salary - 50000, 0)
 
@@ -62,11 +118,9 @@ def apply_cess(tax):
 def old_regime_tax(income, deductions, age):
     taxable = max(income - deductions, 0)
     exemption = 250000 if age < 60 else 300000 if age < 80 else 500000
-
     if taxable <= exemption:
         return 0
 
-    tax = 0
     if taxable <= 500000:
         tax = (taxable - exemption) * 0.05
     elif taxable <= 1000000:
@@ -106,9 +160,9 @@ def new_regime_tax(income):
 
     return apply_cess(tax)
 
-# ================= FILE PROCESSING =================
+# ---------------- FILE HELPERS ----------------
 @st.cache_data
-def generate_excel(df):
+def create_excel(df):
     buffer = BytesIO()
     df.to_excel(buffer, index=False)
     buffer.seek(0)
@@ -118,7 +172,6 @@ def generate_pdf(df):
     buffer = BytesIO()
     pdf = canvas.Canvas(buffer, pagesize=A4)
     w, h = A4
-
     pdf.setFont("Helvetica-Bold", 14)
     pdf.drawString(40, h - 40, "Indian Income Tax Report")
     pdf.setFont("Helvetica", 10)
@@ -138,44 +191,37 @@ def generate_pdf(df):
     buffer.seek(0)
     return buffer
 
-# ================= MAIN LOGIC =================
+# ---------------- MAIN LOGIC ----------------
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 
     st.subheader("📋 Uploaded Data")
     st.dataframe(df, use_container_width=True)
 
-    n = st.number_input(
-        "Records to process",
-        min_value=1,
-        max_value=len(df),
-        value=min(20, len(df))
-    )
-
+    n = st.number_input("Records to process", 1, len(df), min(20, len(df)))
     df = df.head(n)
 
-    records = []
-    for _, row in df.iterrows():
-        income = salary_after_standard_deduction(row["grossincome"])
-        old_tax = old_regime_tax(income, row["Deductions"], row["Age"])
+    rows = []
+    for _, r in df.iterrows():
+        income = salary_after_standard_deduction(r["grossincome"])
+        old_tax = old_regime_tax(income, r["Deductions"], r["Age"])
         new_tax = new_regime_tax(income)
 
-        records.append({
-            "Name": row["Name"],
-            "Department": row["Department"],
-            "Age": row["Age"],
+        rows.append({
+            "Name": r["Name"],
+            "Department": r["Department"],
+            "Age": r["Age"],
             "Income": income,
             "Old Tax": old_tax,
             "New Tax": new_tax,
             "Recommended": "Old" if old_tax < new_tax else "New"
         })
 
-    result = pd.DataFrame(records)
+    result = pd.DataFrame(rows)
 
     st.success("✅ Tax calculation completed")
     st.dataframe(result, use_container_width=True)
 
-    # ================= CHART =================
     def indian(x, _):
         return f"₹{x/1e5:.1f}L" if x < 1e7 else f"₹{x/1e7:.1f}Cr"
 
@@ -186,24 +232,9 @@ if uploaded_file:
     ax.set_title("Total Tax Comparison")
     st.pyplot(fig)
 
-    # ================= DOWNLOADS =================
-    st.download_button(
-        "⬇️ Download CSV",
-        result.to_csv(index=False),
-        "Tax_Output.csv"
-    )
-
-    st.download_button(
-        "⬇️ Download Excel",
-        generate_excel(result),
-        "Tax_Output.xlsx"
-    )
-
-    st.download_button(
-        "⬇️ Download PDF",
-        generate_pdf(result),
-        "Tax_Report.pdf"
-    )
+    st.download_button("⬇️ Download CSV", result.to_csv(index=False), "Tax_Output.csv")
+    st.download_button("⬇️ Download Excel", create_excel(result), "Tax_Output.xlsx")
+    st.download_button("⬇️ Download PDF", generate_pdf(result), "Tax_Report.pdf")
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
