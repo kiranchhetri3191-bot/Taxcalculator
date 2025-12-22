@@ -134,6 +134,28 @@ else:
     </style>
     """, unsafe_allow_html=True)
 
+uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
+
+if dark_mode:
+    st.sidebar.markdown("""
+    <style>
+    section[data-testid="stFileUploader"] {
+        position: relative;
+    }
+    section[data-testid="stFileUploader"]::after {
+        content: "Drag and drop CSV file here (Max 200 MB)";
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #E5E7EB;
+        font-size: 13px;
+        pointer-events: none;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 # ---------------- INFO ----------------
 st.info(
     "📄 **How to use:** Upload a CSV with columns:\n\n"
@@ -142,12 +164,6 @@ st.info(
 
 # ---------------- SIDEBAR UPLOADER ----------------
 uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
-
-st.sidebar.markdown(
-    "<span style='color:#E5E7EB; font-size:13px;'>Drag and drop CSV file here (Max 200 MB)</span>",
-    unsafe_allow_html=True
-)
-
 
 # ---------------- TAX FUNCTIONS ----------------
 def apply_surcharge_and_cess(tax, taxable, regime):
@@ -316,6 +332,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
