@@ -123,6 +123,12 @@ if dark_mode:
         background-color: #0E1117 !important;
     }
 
+        /* Hide default uploader text */
+    section[data-testid="stFileUploader"] small {
+        visibility: hidden !important;
+    }
+
+
     </style>
     """, unsafe_allow_html=True)
 
@@ -134,6 +140,13 @@ else:
     </style>
     """, unsafe_allow_html=True)
 
+# ---------------- INFO ----------------
+st.info(
+    "📄 **How to use:** Upload a CSV with columns:\n\n"
+    "**Name, Department, Age, GrossIncome, Deductions**"
+)
+
+# ---------------- SIDEBAR UPLOADER ----------------
 uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
 
 if dark_mode:
@@ -155,15 +168,6 @@ if dark_mode:
     </style>
     """, unsafe_allow_html=True)
 
-
-# ---------------- INFO ----------------
-st.info(
-    "📄 **How to use:** Upload a CSV with columns:\n\n"
-    "**Name, Department, Age, GrossIncome, Deductions**"
-)
-
-# ---------------- SIDEBAR UPLOADER ----------------
-uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
 
 # ---------------- TAX FUNCTIONS ----------------
 def apply_surcharge_and_cess(tax, taxable, regime):
@@ -332,6 +336,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
