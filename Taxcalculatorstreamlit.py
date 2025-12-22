@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -22,7 +23,8 @@ with col2:
 
 # ---------------- DARK MODE ----------------
 dark_mode = st.sidebar.toggle("🌙 Dark Mode")
- 
+
+if dark_mode:
     st.markdown("""
     <style>
     /* ---------- BASE ---------- */
@@ -307,27 +309,6 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
