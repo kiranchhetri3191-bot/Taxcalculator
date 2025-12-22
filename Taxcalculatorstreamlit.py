@@ -264,9 +264,9 @@ def generate_summary_pdf(df):
     summary_lines = [
         f"Total Employees Processed: {total_employees}",
         f"Average Income: RS{avg_income}",
-        f"Total Old Regime Tax: RS{total_old_tax}",
-        f"Total New Regime Tax: RS{total_new_tax}",
-        f"Total Tax Saved: RS{tax_saved}",
+        f"Total Old Regime Tax: '₹'{total_old_tax}",
+        f"Total New Regime Tax: '₹'{total_new_tax}",
+        f"Total Tax Saved: '₹'{tax_saved}",
         f"Better Regime Overall: {better_regime}",
     ]
 
@@ -369,6 +369,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
