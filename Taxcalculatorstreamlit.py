@@ -301,9 +301,15 @@ if uploaded_file is not None:
         "text/csv"
     )
 
-    excel_buffer = BytesIO()
-    df_out.to_excel(excel_buffer, index=False)
-    excel_buffer.seek(0)
+    @st.cache_data
+    def create_excel(df):
+        buffer = BytesIO()
+        df.to_excel(buffer, index=False, engine="openpyxl")
+        buffer.seek(0)
+        return buffer
+
+
+    excel_buffer = create_excel(df_out)
 
     st.download_button(
         "⬇️ Download Excel",
@@ -312,8 +318,10 @@ if uploaded_file is not None:
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
