@@ -242,6 +242,46 @@ def generate_pdf(df):
     buffer.seek(0)
     return buffer
 
+def generate_summary_pdf(df):
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+
+    total_employees = len(df)
+    avg_income = int(df["Income"].mean())
+    total_old_tax = int(df["Old Regime Tax"].sum())
+    total_new_tax = int(df["New Regime Tax"].sum())
+    tax_saved = abs(total_old_tax - total_new_tax)
+
+    better_regime = "Old Regime" if total_old_tax < total_new_tax else "New Regime"
+
+    pdf.setFont("Helvetica-Bold", 16)
+    pdf.drawString(50, height - 50, "Indian Income Tax Summary Report")
+
+    pdf.setFont("Helvetica", 11)
+    y = height - 100
+
+    summary_lines = [
+        f"Total Employees Processed: {total_employees}",
+        f"Average Income: ₹{avg_income}",
+        f"Total Old Regime Tax: ₹{total_old_tax}",
+        f"Total New Regime Tax: ₹{total_new_tax}",
+        f"Total Tax Saved: ₹{tax_saved}",
+        f"Better Regime Overall: {better_regime}",
+    ]
+
+    for line in summary_lines:
+        pdf.drawString(50, y, line)
+        y -= 22
+
+    pdf.setFont("Helvetica-Oblique", 9)
+    pdf.drawString(50, 50, "Note: This summary is for educational purposes only.")
+
+    pdf.save()
+    buffer.seek(0)
+    return buffer
+
+
 # ---------------- MAIN LOGIC ----------------
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
@@ -318,9 +358,18 @@ if uploaded_file is not None:
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+    st.download_button(
+        "📊 Download Summary Report (PDF)",
+        generate_summary_pdf(df_out),
+        "Tax_Summary_Report.pdf",
+        "application/pdf"
+    )
+
+
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
