@@ -39,13 +39,104 @@ dark_mode = st.sidebar.toggle("🌙 Dark Mode")
 if dark_mode:
     st.markdown("""
     <style>
-    .stApp { background-color:#0E1117; color:#EAEAEA; }
-    h1,h2,h3,h4 { color:white; }
-    section[data-testid="stSidebar"] { background-color:#0E1117; }
-    section[data-testid="stSidebar"] * { color:white; }
-    button { background-color:#2E7D32 !important; color:white !important; }
+    /* ---------- BASE ---------- */
+    .stApp {
+        background-color: #0E1117;
+        color: #EAEAEA;
+    }
+
+    html, body, [class*="css"] {
+        color: #EAEAEA !important;
+    }
+
+    /* ---------- HEADINGS ---------- */
+    h1, h2, h3, h4, h5, h6 {
+        color: #FFFFFF !important;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    section[data-testid="stSidebar"] {
+        background-color: #0B1320 !important;
+        border-right: 1px solid #1F2937;
+    }
+
+    section[data-testid="stSidebar"] * {
+        color: #EAEAEA !important;
+    }
+
+    /* ---------- INFO / SUCCESS / WARNING / ERROR ---------- */
+    .stAlert {
+        background-color: #111827 !important;
+        color: #EAEAEA !important;
+        border: 1px solid #1F2937 !important;
+        border-radius: 10px;
+    }
+
+    /* ---------- DATAFRAME ---------- */
+    .stDataFrame {
+        background-color: #0E1117 !important;
+    }
+
+    .stDataFrame thead tr th {
+        background-color: #111827 !important;
+        color: #FFFFFF !important;
+    }
+
+    .stDataFrame tbody tr td {
+        background-color: #0E1117 !important;
+        color: #EAEAEA !important;
+        border-color: #1F2937 !important;
+    }
+
+    /* ---------- FILE UPLOADER ---------- */
+    section[data-testid="stFileUploader"] {
+        background-color: #111827 !important;
+        border: 1px dashed #374151 !important;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    section[data-testid="stFileUploader"] label,
+    section[data-testid="stFileUploader"] small {
+        color: #EAEAEA !important;
+    }
+
+    /* ---------- INPUTS ---------- */
+    input, textarea {
+        background-color: #0B1320 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #374151 !important;
+    }
+
+    label {
+        color: #EAEAEA !important;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    button {
+        background-color: #2563EB !important;
+        color: #FFFFFF !important;
+        border-radius: 8px !important;
+        border: none !important;
+    }
+
+    button:hover {
+        background-color: #1D4ED8 !important;
+    }
+
+    /* ---------- NUMBER INPUT ARROWS ---------- */
+    div[data-baseweb="input"] svg {
+        fill: #FFFFFF !important;
+    }
+
+    /* ---------- PLOTS ---------- */
+    .js-plotly-plot, .stPlotlyChart, canvas {
+        background-color: #0E1117 !important;
+    }
+
     </style>
     """, unsafe_allow_html=True)
+
 else:
     st.markdown("""
     <style>
@@ -223,6 +314,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
