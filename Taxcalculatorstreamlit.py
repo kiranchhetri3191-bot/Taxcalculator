@@ -328,6 +328,37 @@ if uploaded_file is not None:
         axis=1
     )
 
+    st.markdown("### 📊 Department-wise Tax Comparison")
+
+    fig, ax = plt.subplots()
+
+    x = range(len(dept_summary))
+
+    ax.bar(
+        x,
+        dept_summary["Old_Tax"],
+        label="Old Regime Tax"
+    )
+
+    ax.bar(
+        x,
+        dept_summary["New_Tax"],
+        bottom=dept_summary["Old_Tax"] * 0,
+        label="New Regime Tax"
+    )
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(dept_summary["Department"], rotation=30, ha="right")
+
+    ax.set_ylabel("Tax Amount (₹)")
+    ax.set_title("Old vs New Tax by Department")
+    ax.legend()
+
+    ax.yaxis.set_major_formatter(FuncFormatter(indian_format))
+
+    st.pyplot(fig)
+
+
 
     total_old_tax = df_out["Old Regime Tax"].sum()
     total_new_tax = df_out["New Regime Tax"].sum()
@@ -418,6 +449,7 @@ st.caption(
 st.caption(
     "© 2025 | Developed as an independent academic project for learning and demonstration purposes."
 )
+
 
 
 
