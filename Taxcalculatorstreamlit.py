@@ -9,8 +9,7 @@ from matplotlib.ticker import FuncFormatter
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Indian Tax Calculator",
-    page_icon="logo.png
-    ",
+    page_icon="logo.png",
     layout="wide"
 )
 
@@ -280,4 +279,5 @@ if uploaded_file:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
