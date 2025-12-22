@@ -383,6 +383,10 @@ st.caption(
     "exemptions, allowances, and latest government notifications."
 )
 
+st.caption(
+    "© 2025 | Developed as an independent academic project for learning and demonstration purposes."
+)
+
 
 
 
