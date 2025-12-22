@@ -328,35 +328,37 @@ if uploaded_file is not None:
         axis=1
     )
 
-    st.markdown("### 📊 Department-wise Tax Comparison")
+st.markdown("### 📊 Department-wise Tax Comparison")
 
-    fig, ax = plt.subplots()
+fig, ax = plt.subplots()
 
-    x = range(len(dept_summary))
+x = range(len(dept_summary))
+width = 0.35
 
-    ax.bar(
-        x,
-        dept_summary["Old_Tax"],
-        label="Old Regime Tax"
-    )
+ax.bar(
+    [i - width/2 for i in x],
+    dept_summary["Old_Tax"],
+    width,
+    label="Old Regime Tax"
+)
 
-    ax.bar(
-        x,
-        dept_summary["New_Tax"],
-        bottom=dept_summary["Old_Tax"] * 0,
-        label="New Regime Tax"
-    )
+ax.bar(
+    [i + width/2 for i in x],
+    dept_summary["New_Tax"],
+    width,
+    label="New Regime Tax"
+)
 
-    ax.set_xticks(x)
-    ax.set_xticklabels(dept_summary["Department"], rotation=30, ha="right")
+ax.set_xticks(x)
+ax.set_xticklabels(dept_summary["Department"], rotation=30, ha="right")
 
-    ax.set_ylabel("Tax Amount (₹)")
-    ax.set_title("Old vs New Tax by Department")
-    ax.legend()
+ax.set_ylabel("Tax Amount (₹)")
+ax.set_title("Old vs New Tax by Department")
+ax.legend()
 
-    ax.yaxis.set_major_formatter(FuncFormatter(indian_format))
+ax.yaxis.set_major_formatter(FuncFormatter(indian_format))
 
-    st.pyplot(fig)
+st.pyplot(fig)
 
 
 
@@ -449,6 +451,7 @@ st.caption(
 st.caption(
     "© 2025 | Developed as an independent academic project for learning and demonstration purposes."
 )
+
 
 
 
