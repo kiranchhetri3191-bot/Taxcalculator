@@ -377,6 +377,12 @@ st.caption(
     "Tax laws change frequently. Please consult a qualified tax professional before filing returns."
 )
 
+st.caption(
+    "🧠 Practical Reliability: Calculations are based on user-provided data and standard assumptions "
+    "(such as standard deduction and basic slabs). Actual tax liability may vary based on individual "
+    "exemptions, allowances, and latest government notifications."
+)
+
 
 
 
