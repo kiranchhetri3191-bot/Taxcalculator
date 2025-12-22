@@ -89,6 +89,14 @@ if dark_mode:
         color: #EAEAEA !important;
     }
 
+        /* ---------- FILE UPLOADER TRANSPARENT ---------- */
+    section[data-testid="stFileUploader"] {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 12px;
+    }
+
+
     /* ---------- INPUTS ---------- */
     input, textarea {
         background-color: #0B1320 !important;
@@ -309,6 +317,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
