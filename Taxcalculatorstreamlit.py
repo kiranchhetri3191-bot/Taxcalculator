@@ -135,7 +135,7 @@ else:
 # ---------------- INFO ----------------
 st.info(
     "📄 **How to use:** Upload a CSV with columns:\n\n"
-    "**Name, Department, Age, Grossincome, Deductions**"
+    "**Name, Department, Age, GrossIncome, Deductions**"
 )
 
 # ---------------- SIDEBAR UPLOADER ----------------
@@ -241,7 +241,7 @@ if uploaded_file is not None:
 
     records = []
     for _, row in df.iterrows():
-        income = salary_after_standard_deduction(row["Grossincome"])
+        income = salary_after_standard_deduction(row["GrossIncome"])
         old_tax = old_regime_tax(income, row["Deductions"], row["Age"])
         new_tax = new_regime_tax(income)
 
@@ -308,6 +308,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
