@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-    
-
-
-
-
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -321,6 +308,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
