@@ -310,7 +310,17 @@ if uploaded_file is not None:
         })
 
     df_out = pd.DataFrame(records)
+
+    total_old_tax = df_out["Old Regime Tax"].sum()
+    total_new_tax = df_out["New Regime Tax"].sum()
+    total_tax_saved = abs(total_old_tax - total_new_tax)
+
+    
     st.success("✅ Tax calculation completed")
+
+    st.write(f"💰 Total Tax Saved: ₹{int(total_tax_saved):,}")
+
+    
     st.dataframe(df_out)
 
     # ---------------- CHART ----------------
@@ -386,6 +396,7 @@ st.caption(
 st.caption(
     "© 2025 | Developed as an independent academic project for learning and demonstration purposes."
 )
+
 
 
 
