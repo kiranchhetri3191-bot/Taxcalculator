@@ -15,100 +15,111 @@ st.set_page_config(
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.title("⚙ Controls")
-dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=True)
 uploaded_file = st.sidebar.file_uploader("📂 Upload CSV", type="csv")
 st.sidebar.markdown("---")
-st.sidebar.caption("Supports large CSV (100k+)")
+st.sidebar.info("💡 Finance-ready • Supports large CSV")
 
-# ---------------- CLEAN DARK THEME ----------------
-if dark_mode:
-    st.markdown("""
-    <style>
-    /* ===== BACKGROUND ===== */
-    .stApp {
-        background-color: #0f172a;
-        color: #e5e7eb;
-    }
+# ---------------- GREEN THEME (SAFE) ----------------
+st.markdown("""
+<style>
+/* ===== BASE ===== */
+.stApp {
+    background-color: #F5FBF7;
+    color: #1F2937;
+}
 
-    /* ===== CONTENT PADDING ===== */
-    .block-container {
-        padding: 2.5rem 3rem;
-    }
+/* ===== LAYOUT ===== */
+.block-container {
+    padding: 2.5rem 3rem;
+}
 
-    /* ===== HEADINGS ===== */
-    h1, h2, h3 {
-        color: #f9fafb;
-        font-weight: 700;
-    }
+/* ===== HEADINGS ===== */
+h1, h2, h3 {
+    color: #14532D;
+    font-weight: 700;
+}
 
-    /* ===== SIDEBAR ===== */
-    section[data-testid="stSidebar"] {
-        background-color: #020617;
-        border-right: 1px solid #1e293b;
-    }
+/* ===== SIDEBAR ===== */
+section[data-testid="stSidebar"] {
+    background-color: #ECFDF5;
+    border-right: 2px solid #A7F3D0;
+}
+section[data-testid="stSidebar"] * {
+    color: #065F46;
+    font-weight: 500;
+}
 
-    section[data-testid="stSidebar"] * {
-        color: #e5e7eb;
-    }
+/* ===== INFO / SUCCESS ===== */
+.stAlert {
+    background-color: #ECFDF5 !important;
+    border: 1px solid #A7F3D0 !important;
+    color: #065F46 !important;
+    border-radius: 10px;
+}
 
-    /* ===== INFO / SUCCESS ===== */
-    .stAlert {
-        background-color: #020617;
-        border: 1px solid #1e293b;
-        color: #e5e7eb;
-        border-radius: 10px;
-    }
+/* ===== TABLE ===== */
+.stDataFrame thead tr th {
+    background-color: #D1FAE5 !important;
+    color: #065F46 !important;
+}
+.stDataFrame tbody tr td {
+    background-color: #F5FBF7 !important;
+    color: #1F2937 !important;
+    border-color: #A7F3D0 !important;
+}
 
-    /* ===== TABLE ===== */
-    .stDataFrame {
-        background-color: #0f172a;
-    }
+/* ===== INPUTS ===== */
+input {
+    background-color: #FFFFFF !important;
+    border: 1px solid #10B981 !important;
+    border-radius: 6px !important;
+}
 
-    .stDataFrame thead tr th {
-        background-color: #020617;
-        color: #f9fafb;
-    }
+/* ===== BUTTONS ===== */
+button {
+    background-color: #10B981 !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 0.45rem 1.1rem !important;
+}
+button:hover {
+    background-color: #059669 !important;
+}
 
-    .stDataFrame tbody tr td {
-        background-color: #0f172a;
-        color: #e5e7eb;
-        border-color: #1e293b;
-    }
-
-    /* ===== INPUTS ===== */
-    input {
-        background-color: #020617;
-        color: #f9fafb;
-        border: 1px solid #1e293b;
-        border-radius: 6px;
-    }
-
-    /* ===== DOWNLOAD BUTTONS ===== */
-    div[data-testid="stDownloadButton"] > button {
-        background-color: #2563eb;
-        color: white;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 0.5rem 1.2rem;
-        opacity: 1;
-    }
-
-    div[data-testid="stDownloadButton"] > button:hover {
-        background-color: #1d4ed8;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+/* ===== DOWNLOAD BUTTON ===== */
+div[data-testid="stDownloadButton"] > button {
+    background-color: #16A34A !important;
+}
+div[data-testid="stDownloadButton"] > button:hover {
+    background-color: #15803D !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ---------------- HEADER ----------------
-st.title("💰 Indian Income Tax Calculator")
-st.caption("Old vs New Regime • Bulk CSV • Excel & PDF")
+st.markdown("""
+<div style="
+    background:#ECFDF5;
+    padding:25px;
+    border-radius:14px;
+    border-left:8px solid #10B981;
+">
+<h1>💰 Indian Income Tax Calculator</h1>
+<p style="font-size:16px;color:#065F46;">
+Compare Old vs New Regime • CSV • Excel • PDF
+</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.write("")
 
 st.info(
     "📄 Upload CSV with columns:\n"
     "**Name, Department, Age, grossincome, Deductions**"
 )
 
-# ---------------- TAX FUNCTIONS ----------------
+# ---------------- TAX LOGIC ----------------
 def salary_after_standard_deduction(salary):
     return max(salary - 50000, 0)
 
@@ -172,6 +183,7 @@ def generate_pdf(df):
     buffer = BytesIO()
     pdf = canvas.Canvas(buffer, pagesize=A4)
     w, h = A4
+
     pdf.setFont("Helvetica-Bold", 14)
     pdf.drawString(40, h - 40, "Indian Income Tax Report")
     pdf.setFont("Helvetica", 10)
@@ -191,7 +203,7 @@ def generate_pdf(df):
     buffer.seek(0)
     return buffer
 
-# ---------------- MAIN LOGIC ----------------
+# ---------------- MAIN ----------------
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 
@@ -227,7 +239,8 @@ if uploaded_file:
 
     fig, ax = plt.subplots()
     ax.bar(["Old Regime", "New Regime"],
-           [result["Old Tax"].sum(), result["New Tax"].sum()])
+           [result["Old Tax"].sum(), result["New Tax"].sum()],
+           color=["#10B981", "#059669"])
     ax.yaxis.set_major_formatter(FuncFormatter(indian))
     ax.set_title("Total Tax Comparison")
     st.pyplot(fig)
