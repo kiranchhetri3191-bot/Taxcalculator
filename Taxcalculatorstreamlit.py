@@ -84,17 +84,9 @@ if dark_mode:
         padding: 10px;
     }
 
-    /* ---------- FILE UPLOADER HELPER TEXT FIX ---------- */
-    section[data-testid="stFileUploader"] div {
-        color: #D1D5DB !important; /* light grey, clearly visible */
-    }
-
+    section[data-testid="stFileUploader"] label,
     section[data-testid="stFileUploader"] small {
-        color: #9CA3AF !important; /* secondary helper text */
-    }
-
-    section[data-testid="stFileUploader"] span {
-        color: #E5E7EB !important;
+        color: #EAEAEA !important;
     }
 
     /* ---------- INPUTS ---------- */
@@ -317,7 +309,6 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
-
 
 
 
