@@ -147,7 +147,7 @@ uploaded_file = st.sidebar.file_uploader("📂 Upload CSV File", type="csv")
 st.sidebar.markdown(
     """
     <div style="text-align:center; color:#E5E7EB; font-size:13px; margin-top:6px;">
-        ⬆️ Drag and drop CSV file here (Max 200 MB)
+        👆🏻 Drag and drop CSV file here (Max 200 MB)
     </div>
     """,
     unsafe_allow_html=True
@@ -321,6 +321,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
