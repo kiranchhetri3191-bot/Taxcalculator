@@ -6,29 +6,28 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from matplotlib.ticker import FuncFormatter
 
-# ---------------- PAGE CONFIG ----------------
+# ================= PAGE CONFIG =================
 st.set_page_config(
     page_title="Indian Income Tax Calculator",
-    page_icon="logo.png",
+    page_icon="💰",
     layout="wide"
 )
 
-# ---------------- SIDEBAR TOGGLE ----------------
+# ================= SIDEBAR =================
+st.sidebar.title("⚙ Controls")
 dark_mode = st.sidebar.toggle("🌙 Dark Mode", value=True)
+uploaded_file = st.sidebar.file_uploader("📂 Upload CSV", type="csv")
+st.sidebar.info("Supports large CSV (50k–100k rows)")
 
-# ---------------- CSS ----------------
+# ================= SAFE THEME =================
 if dark_mode:
     st.markdown("""
     <style>
-    /* ===== BASE ===== */
     .stApp {
         background-color: #0E1117;
         color: #EAEAEA;
     }
-    html, body, [class*="css"] {
-        color: #EAEAEA !important;
+    h1, h2, h3, h4 {
+        color: #FFFFFF;
     }
-
-    /* ===== LAYOUT ===== */
-    .block-container {
-        padding: 3rem !
+    .block-container
