@@ -347,7 +347,7 @@ def generate_pdf(df):
 
 
 
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+
 
 if uploaded_file is not None:
     df_input = pd.read_csv(uploaded_file)
@@ -442,6 +442,8 @@ else:
 
 
     
+
+
 
 
 
