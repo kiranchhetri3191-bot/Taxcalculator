@@ -162,6 +162,22 @@ st.markdown(
 
 st.write("")  # spacing
 
+# ---------------- SIDEBAR ----------------
+st.sidebar.markdown(
+    """
+    <h2 style='color:#1B5E20;'>⚙ Controls</h2>
+    """,
+    unsafe_allow_html=True
+)
+
+uploaded_file = st.sidebar.file_uploader(
+    "📂 Upload CSV File",
+    type="csv"
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info("💡 Tip: Use clean data for accurate results")
+
 # ---------------- MAIN LOGIC ----------------
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
@@ -426,6 +442,7 @@ else:
 
 
     
+
 
 
 
