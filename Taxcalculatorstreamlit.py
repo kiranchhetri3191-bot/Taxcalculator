@@ -24,6 +24,23 @@ with col2:
 dark_mode = st.sidebar.toggle("🌙 Dark Mode")
 
 if dark_mode:
+        /* ---------- FILE UPLOADER TEXT FIX ---------- */
+    section[data-testid="stFileUploader"] div {
+        color: #E5E7EB !important;   /* brighter text */
+    }
+
+    section[data-testid="stFileUploader"] p {
+        color: #E5E7EB !important;
+        font-weight: 500;
+    }
+
+    section[data-testid="stFileUploader"] svg {
+        fill: #60A5FA !important;   /* icon visibility */
+    }
+
+
+
+    
     st.markdown("""
     <style>
     /* ---------- BASE ---------- */
@@ -308,6 +325,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
