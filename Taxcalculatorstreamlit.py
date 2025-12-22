@@ -129,7 +129,7 @@ if dark_mode:
 # ---------------- HEADER ----------------
 st.markdown("""
 <div class="card">
-    <h1>💰 Indian Income Tax Calculator</h1>
+    <h1>logo.png Indian Income Tax Calculator</h1>
     <p style="font-size:16px; color:#9CA3AF;">
     Compare Old vs New Regime • Bulk CSV • PDF • Excel
     </p>
@@ -279,4 +279,5 @@ if uploaded_file:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
