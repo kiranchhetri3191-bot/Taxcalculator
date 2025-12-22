@@ -89,6 +89,28 @@ if dark_mode:
         color: #EAEAEA !important;
     }
 
+
+        /* ---------- FILE UPLOADER (FIXED PROPERLY) ---------- */
+    section[data-testid="stFileUploader"] {
+        background-color: #1F2937 !important;  /* visible dark box */
+        border: 2px dashed #3B82F6 !important; /* blue accent */
+        border-radius: 12px;
+        padding: 16px;
+    }
+
+    /* Drag & drop text */
+    section[data-testid="stFileUploader"] div,
+    section[data-testid="stFileUploader"] span {
+        color: #F9FAFB !important;
+        font-weight: 500;
+    }
+
+    /* 200 MB helper text */
+    section[data-testid="stFileUploader"] small {
+        color: #D1D5DB !important;
+    }
+
+
     /* ---------- INPUTS ---------- */
     input, textarea {
         background-color: #0B1320 !important;
@@ -309,6 +331,7 @@ if uploaded_file is not None:
 
 else:
     st.warning("⚠ Upload a CSV file to begin")
+
 
 
 
