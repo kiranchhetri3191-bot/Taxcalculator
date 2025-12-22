@@ -175,7 +175,10 @@ st.sidebar.markdown(
 
 
 
-
+uploaded_file = st.sidebar.file_uploader(
+    "📂 Upload CSV File",
+    type="csv"
+)
 
 st.sidebar.markdown("---")
 st.sidebar.info("💡 Tip: Use clean data for accurate results")
@@ -444,6 +447,7 @@ else:
 
 
     
+
 
 
 
