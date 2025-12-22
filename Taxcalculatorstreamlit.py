@@ -371,6 +371,13 @@ else:
     st.warning("⚠ Upload a CSV file to begin")
 
 
+st.caption(
+    "⚠️ Disclaimer: This calculator is for educational and estimation purposes only. "
+    "Tax laws change frequently. Please consult a qualified tax professional before filing returns."
+)
+
+
+
 
 
 
