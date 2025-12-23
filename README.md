@@ -69,9 +69,13 @@ Tax rules applied as per:
 ## ▶️ How to Run the Project
 
 1. Clone the repository
-2. Install dependencies:
+   
+3. Install dependencies:
+   ```bash
    pip install -r requirements.txt
-3. Run the app:
+   ```
+   
+5. Run the app:
    streamlit run app.py
 
 ## © Copyright & Usage
