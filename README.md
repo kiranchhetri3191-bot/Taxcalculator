@@ -76,7 +76,9 @@ Tax rules applied as per:
    ```
    
 5. Run the app:
+   ```bash
    streamlit run app.py
+   ```
 
 ## © Copyright & Usage
 
